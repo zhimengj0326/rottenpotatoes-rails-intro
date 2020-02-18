@@ -11,15 +11,21 @@ class MoviesController < ApplicationController
   end
 
   def index
+    @all_ratings = Movie.all_ratings
+    default_ratings = Hash[@all_ratings.map { |r| [r, r] }]
     ## test
     sort = params[:sort]
+    @checked_ratings = params[:ratings] || default_ratings
+
+    # define toggled column
     case sort
     when 'title'
       @title_cls = 'hilite'
     when 'release_date'
       @release_cls = 'hilite'
     end
-    @movies = Movie.order(params[:sort])
+    
+    @movies = Movie.with_ratings(@checked_ratings.keys).order(sort)
   end
 
   def new
