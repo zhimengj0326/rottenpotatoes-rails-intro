@@ -11,6 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
+    ## test
     sort = params[:sort]
     case sort
     when 'title'
