@@ -20,6 +20,7 @@ class MoviesController < ApplicationController
     if !params[:commit].nil? || params[:ratings].nil? || (params[:sort].nil? && !session[:sort].nil?)
       flash.keep
       redirect_to movies_path :sort => sort, :ratings => @checked_ratings
+    end
 
     # define toggled column
     case sort
